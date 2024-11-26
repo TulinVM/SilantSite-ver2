@@ -1,0 +1,93 @@
+{% extends 'home.html' %} {% block title %} Мой силант {% endblock title %}
+
+{% block content %}
+
+{% load static %}
+
+<main class="main">
+  <div class="result-wrapper">
+    <h1>Информация обо всех заказах ТО для ваших машин</h1>
+    <div class="tabs">
+      <form action="{% url 'machine_list' %}">
+        <button class="sign-button active-tab" class="sign-button">
+          Общая информация
+        </button>
+      </form>
+      <form action="{% url 'maintenance_list' %}">
+        <button class="sign-button active-tab" class="sign-button">
+          Техническое обслуживание
+        </button>
+      </form>
+      <form action="{% url 'complaints_list' %}">
+        <button class="sign-button active-tab" class="sign-button">
+          Рекламации
+        </button>
+      </form>
+    </div>
+
+    {% if maintenances %}
+
+      <div class="form-wrapper form-wrapper-small">
+        <form method="get" class="login">
+          <div class="right">{{ filter.form }}</div>
+          <button type="submit" class="sign-button sign-button-large">
+            Фильтровать
+          </button>
+        </form>
+      </div>
+    <div class="adaptive-table-wrapper">
+      <table class="adaptive-table">
+        <thead>
+          <tr>
+            <th>Зав. № машины</th>
+            <th>Вид ТО</th>
+            <th>Дата проведения ТО</th>
+            <th>Наработка, м\час</th>
+            <th>№ заказ-наряда</th>
+            <th>Дата заказ-наряда</th>
+            <th>Организация проводившая ТО</th>
+            <th>Изменить</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for maintenance in filter.qs %}
+          
+            <td>{{ maintenance.machine.serial_number }}</td>
+            <td>{{ maintenance.maintenance_type }}</td>
+            <td>{{ maintenance.maintenance_date }}</td>
+            <td>{{ maintenance.operating_hours }}</td>
+            <td>{{ maintenance.order_number }}</td>
+            <td>{{ maintenance.order_date }}</td>
+            <td>{{ maintenance.maintenance_organization }}</td>
+            
+              {% csrf_token %}
+
+               <td>
+                  <a href="{% url 'maintenance_update' maintenance.pk %}">Редактировать</a>
+                  <a href="{% url 'maintenance_delete' maintenance.pk %}">Удалить</a>
+                </td>             
+            
+            
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    
+  {% else %}
+  <div class="result-wrapper">
+    <span class="info-if-doesnt-exists">Заказов ТО нет в базе</span>
+  </div>
+  {% endif %}
+  
+  {% if can_add_maintenance %}
+
+  <form action="{% url 'maintenance_create' %}">
+            <button class="sign-button active-tab" class="sign-button">
+              Создать
+            </button>
+  {% endif %}
+  <a href="{% url 'maintenance_list' %}" class="back-href">Назад</a>
+</main>
+
+{% endblock %}

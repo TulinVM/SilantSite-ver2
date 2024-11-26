@@ -1,0 +1,22 @@
+{% extends 'home.html' %}
+<a></a>
+{% block title %} Мой силант {% endblock title %}
+<a></a>
+{% block content %}
+<a></a>
+<div class="create-form-wrapper">
+  <h1>Создание рекламации {{ title }}</h1>
+  <form action="" method="POST" class="create-form">
+    <div class="labels-inputs">{% csrf_token %} {{ form.as_p }}</div>
+    <div class="submit-form-button">
+      <button type="submit" class="sign-button sign-button-large">
+        Отправить
+      </button>
+    </div>
+  </form>
+</div>
+<div class="back">
+  <a href="{% url 'complaints_list' %}" class="back-href">Отмена</a>
+</div>
+<a></a>
+{% endblock content %}

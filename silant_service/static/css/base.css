@@ -1,0 +1,116 @@
+@font-face {
+  font-family: "PT Astra Sans";
+  src: url(../fonts/PT-Astra-Sans_Regular.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: "PT Astra Sans", sans-serif;
+}
+
+nav {
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-signin-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-signin-wrapper > img {
+  height: 60px;
+  padding: 20px 0 20px 20px;
+}
+
+.logo-signin-wrapper > a {
+  color: black;
+  text-decoration: none;
+  padding-right: 20px;
+}
+
+.logo-signin-wrapper > a:visited {
+  color: black;
+}
+
+.title {
+  color: #163e6c;
+  font-size: 32px;
+  padding: 20px 0 20px 0;
+}
+
+.main-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 20px 0 0 0;
+  margin-bottom: 20px;
+  height: 200vh;
+}
+
+footer {
+  background-color: #163e6c;
+  height: 100px;
+  width: 100%;
+}
+
+.footer-wrapper {
+  color: white;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.footer-wrapper > span {
+  padding: 30px 20px 30px 20px;
+}
+
+.tabs > .active-tab {
+  background-color: rgba(110, 172, 218, 0.9);
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .logo-signin-wrapper > a {
+    padding-right: 5px;
+  }
+}

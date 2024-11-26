@@ -1,0 +1,28 @@
+div > input, select {
+    border-radius: 5px;
+    padding: 5px;
+    background-color: white;
+    border: 1px solid #163E6C;
+    width: 300px;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+div > input {
+    width: 188px;
+}
+
+.right {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .right {
+        align-items: center;
+    }
+}

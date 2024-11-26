@@ -1,0 +1,61 @@
+{% extends 'home.html' %} {% block title %} Мой силант {% endblock title %}
+<a></a>
+{% block content %}
+<main class="main">
+  {% if machine %}
+  <div class="user-info">
+    <span>Модель техники: {{ machine.equipment }}</span>
+    <span>Заводской номер машины: {{ machine.serial_number }}</span>
+  </div>
+  <div class="result-wrapper">
+    <h1>Информация о проведенных ТО вашей техники</h1>
+
+    {% if maintenances %}
+
+    <div class="form-wrapper form-wrapper-small">
+      <form method="get" class="login">
+        <div class="right">{{ filter.form }}</div>
+        <button type="submit" class="sign-button sign-button-large">
+          Фильтровать
+        </button>
+      </form>
+    </div>
+
+    <div class="adaptive-table-wrapper">
+      <table class="adaptive-table">
+        <thead>
+          <tr>
+            <th>Вид ТО</th>
+            <th>Дата проведения ТО</th>
+            <th>Наработка, м\час</th>
+            <th>№ заказ-наряда</th>
+            <th>Дата заказ-наряда</th>
+            <th>Организация проводившая ТО</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for maintenance in filter.qs %}
+          <tr>
+            <td>{{ maintenance.maintenance_type }}</td>
+            <td>{{ maintenance.maintenance_date }}</td>
+            <td>{{ maintenance.operating_hours }}</td>
+            <td>{{ maintenance.order_number }}</td>
+            <td>{{ maintenance.order_date }}</td>
+            <td>{{ maintenance.maintenance_organization }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <div class="result-wrapper">
+        <span class="info-if-doesnt-exists"
+          >ТО для данной машины не обнаружено</span
+        >
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+  <a href="{% url 'machine_list' %}" class="back-href">Назад</a>
+</main>
+{% endblock content %}

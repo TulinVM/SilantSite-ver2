@@ -1,0 +1,21 @@
+{% extends "home.html" %}
+
+{% load i18n %}
+
+{% block head_title %}Выход{% endblock %}
+
+{% block content %}
+<div class="sign-wrapper">
+    <div class="sign-header">
+        <h4>Выход</h4>
+    </div>
+    <div class="form-wrapper">
+        <p>Вы действительно хотите выйти?</p>
+        <form method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            <button class="sign-button" type="submit">Выход</button>
+        </form>
+        <a href="{% url 'welcome' %}" class="back-href">Отмена</a>
+    </div>
+</div>
+{% endblock %}

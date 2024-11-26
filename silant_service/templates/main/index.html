@@ -1,0 +1,21 @@
+{% extends 'home.html' %} 
+{% block title %} Мой силант {% endblock title %} 
+{% block content %}
+{% load static %}
+<main class="main">
+  <h1>Проверьте комплектацию и технически характеристики техники Силант</h1>
+  <form action="" method="POST" class="get-machine">
+    {% csrf_token %}
+  </form>
+  <div class="result-wrapper">
+        <h1>Информация о комплектации и технических характеристиках вашей техники1</h1>
+  </div>
+    <div class="result-wrapper">
+        <span>Вход на сайт.</span>
+        <h1><a href="{% url 'account_login' %}">Авторизация</a></h1>
+        
+        <span>Поиск не производился или техника не найдена</span>
+    </div>
+    
+</main>
+{% endblock content %}

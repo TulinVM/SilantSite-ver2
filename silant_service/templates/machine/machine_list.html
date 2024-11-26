@@ -1,0 +1,109 @@
+{% extends 'home.html' %} 
+{% block title %} Мой силант {% endblock title %} 
+{% block content %}
+{% load static %}
+<main class="main">
+  <div class="result-wrapper">
+    <h1>Информация о комплектации и технических характеристиках вашей техники</h1>
+      <div class="tabs">
+        <form action="{% url 'machine_list' %}">
+         <button class="sign-button active-tab" class="sign-button">
+                Общая информация
+         </button>
+       </form>
+        <form action="{% url 'maintenance_list' %}">
+          <button class="sign-button active-tab" class="sign-button">
+            Техническое обслуживание
+          </button>
+        </form>
+        <form action="{% url 'complaints_list' %}">
+         <button class="sign-button active-tab" class="sign-button">
+             Рекламации
+          </button>
+        </form>
+      </div>
+          
+          {% if machines %}
+      <div class="form-wrapper form-wrapper-small">
+        <form method="get" class="login">
+          <div class="right">
+                  {{ filter.form }}
+          </div>
+          <button type="submit" class="sign-button sign-button-large">Фильтровать</button>
+        </form>
+      </div>
+
+      <div class="adaptive-table-wrapper">
+        <table class="adaptive-table">
+          <thead>
+            <tr>
+              <th>Зав. № машины</th>
+              <th>Модель техники</th>
+              <th>Модель двигателя</th>
+              <th>Зав № номер двигателя</th>
+              <th>Модель трансмиссии</th>
+              <th>Зав. № трансмиссии</th>
+              <th>Модель ведущего моста</th>
+              <th>Зав. № ведущего моста</th>
+              <th>Модель управляемого моста</th>
+              <th>Зав. № управляемого моста</th>
+              <th>Договор поставки №, дата</th>
+              <th>Дата отгрузки с завода</th>
+              <th>Грузополучатель (конечный потребитель)</th>
+              <th>Адрес доставки (эксплуатации)</th>
+              <th>Комплектация (доп. опции)</th>
+              <th>Клиент</th>
+              <th>Сервисная компания</th>
+              <th>Изменить</th>
+            </tr>
+          </thead>
+          <tbody>
+           {% for machine in filter.qs %}
+            <tr>
+              <td>
+                <div class="summary-button">
+                  <a href="{% url 'machine_detail' machine.id %}" class="back-href">{{ machine.serial_number }}</a>
+                  <img src="{% static 'img/eye.svg' %}" alt="Просмотреть" width="16" height="16" class="mg-lft">
+                </div>
+              </td>
+                <td>{{ machine.equipment }}</td>
+                <td>{{ machine.engine_model }}</td>                      
+                <td>{{ machine.engine_serial }}</td>
+                <td>{{ machine.transmission_model }}</td>
+                <td>{{ machine.transmission_serial }}</td>
+                <td>{{ machine.drive_axle_model }}</td>             
+                <td>{{ machine.drive_axle_serial }}</td>
+                <td>{{ machine.steerable_axle_model }}</td>
+                <td>{{ machine.steerable_axle_serial }}</td>
+                <td>{{ machine.delivery_contract }}</td>
+                <td>{{ machine.shipment_date }}</td>
+                <td>{{ machine.recipient }}</td>
+                <td>{{ machine.delivery_address }}</td>
+                <td>{{ machine.configuration }}</td>
+                <td>{{ machine.client }}</td>
+                <td>{{ machine.service_company }}</td>                                              
+                  {% csrf_token %}                                                  
+                <td>
+                  <a href="{% url 'machine_detail' machine.pk %}">Просмотр</a>
+                  <a href="{% url 'machine_update' machine.pk %}">Редактировать</a>
+                  <a href="{% url 'machine_delete' machine.pk %}">Удалить</a>
+                </td>                     
+            </tr>
+             {% endfor %}
+          </tbody>
+        </table>
+        </div>
+          {% else %}
+        <div class="result-wrapper">
+          <span class="info-if-doesnt-exists">У вас нет машин</span>
+        </div>
+          {% endif %}
+          {% if can_add_machine %}
+            <form action="{% url 'machine_create' %}">
+              <button class="sign-button active-tab" class="sign-button">
+               Добавить
+              </button>            
+              {% endif %}
+            </form>  
+</main>
+{% endblock content %} 

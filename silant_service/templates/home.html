@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Мой силант</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/main/main.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/tabs/tabs.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/forms/create_forms.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/forms/login_forms.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/forms/filter_forms.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/modal/modal.css' %}" />
+  </head>
+
+  <body>
+    <nav>
+      <div class="logo-signin-wrapper">
+        <img src="{% static 'img/logo.jpg' %}" />
+        <div class="contact-container">
+          <span>+7 (999) 999-99-99</span>
+          <span>Телеграм</span>
+        </div>
+        {% if user.is_authenticated %}
+        <a href="{% url 'account_logout' %}">Выйти: {{ user.username }}</a>
+        {% else %}
+        <a href="{% url 'account_login' %}">Авторизация</a>
+        {% endif %}
+      </div>
+    </nav>
+    <h1 class="title">Электронная сервисная книжка "Мой силант"</h1>
+    <section class="main-section">
+      <div class="user-info">
+        {% if client %}
+        <h1>Пользователь: {{ client }}</h1>
+        {% elif user %}
+        <h1>Пользователь: {{ user.last_name }}</h1>
+        {% elif user.is_superuser %}
+        <h1>Пользователь: Администратор</h1>
+        {% else %}
+        <h1>Пользователь: Гость</h1>
+        {% endif %}
+      </div>
+      {% block content %}{% endblock %}
+    </section>
+    <footer>
+      <div class="footer-wrapper">
+        <span>+7 (999) 999-99-99, telegram</span>
+        <span>2024 Мой силант</span>
+      </div>
+    </footer>
+  </body>
+</html>

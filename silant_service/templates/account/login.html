@@ -1,0 +1,19 @@
+{% extends "home.html" %} {% load i18n %} {% load account %}
+<a></a>
+{% block head_title %}Войти{% endblock %}
+<a></a>
+{% block content %}
+
+<div class="sign-wrapper">
+  <div class="sign-header">
+    <h1>Войти</h1>
+  </div>
+  <div class="form-wrapper">
+    <form method="POST" action="{% url 'account_login' %}" class="login">
+      {% csrf_token %} {{ form.as_p }}
+      <button class="sign-button" type="submit">Войти</button>
+    </form>
+    <a href="{% url 'welcome' %}" class="back-href">Отмена</a>
+  </div>
+</div>
+{% endblock %}

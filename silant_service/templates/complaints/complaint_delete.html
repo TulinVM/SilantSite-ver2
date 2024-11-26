@@ -1,0 +1,18 @@
+<!-- complaint_delete.html -->
+{% extends "home.html" %}
+
+<a></a>
+{% block title %}Удалить машину{% endblock %}
+<a></a>
+{% block content %}
+
+<body>
+  <h1>Удалить машину: {{ complaint.machine.serial_number }}</h1>
+  <p>Вы уверены, что хотите удалить рекламацию этой машины?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="sign-button sign-button-large">Удалить</button>
+  </form>
+  <a href="{% url 'complaints_list' %}">Отмена</a>
+</body>
+{% endblock %}
